@@ -38,15 +38,15 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const loginData = {
-        usuarioNombre: this.loginForm.value.usuario, // Asegúrate de que el nombre de la propiedad coincida
+        usuarioNombre: this.loginForm.value.usuario, 
         pass: this.loginForm.value.password,
       };
   
       this.http.post<any>('http://localhost:5078/api/usuarios/login', loginData).subscribe(
         (response) => {
           if (response.mensaje === 'Autenticación exitosa') {
-            // Guardar cualquier dato que desees, como un token si lo tienes
-            localStorage.setItem('token', response.token); // Asegúrate de que la respuesta contenga el token si lo estás usando
+            //Token
+            localStorage.setItem('token', response.token); 
             this.router.navigate(['/dashboard']);
           } else {
             alert('Credenciales incorrectas');

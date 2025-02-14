@@ -53,7 +53,7 @@ export class RegistroComponent implements OnInit {
           numeroIdentificacion: this.registroForm.value.numeroIdentificacion,
           tipoIdentificacion: this.registroForm.value.tipoIdentificacion,
           email: this.registroForm.value.email,
-          fechaCreacion: new Date().toISOString(), // Enviar la fecha actual en formato ISO
+          fechaCreacion: new Date().toISOString(), 
         }
       };
 

@@ -21,12 +21,11 @@
     }
   }
   
-  /* Estilos para el formulario */
   .form-card {
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para el formulario */
+    background: rgba(255, 255, 255, 0.9); 
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
@@ -45,8 +44,7 @@
     margin-bottom: 20px;
   }
   
-  /* Estilos para los mensajes de error */
   .error {
-    color: #f44336; /* Rojo de Material Design */
+    color: #f44336; 
     font-size: 0.875rem;
   }
