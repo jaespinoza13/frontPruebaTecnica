@@ -1,13 +1,18 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; 
 import { routes } from './app/app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // Asegúrate de que el path es correcto
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthInterceptor } from '../interceptors/auth.interceptor';  // Asegúrate de que la ruta es correcta
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),  // 💡 Aquí pasamos las rutas correctamente
-    provideHttpClient(), provideAnimationsAsync(), provideAnimationsAsync()     // 💡 HttpClient correctamente añadido
-  ]
-}).catch(err => console.error(err));
+    provideRouter(routes),
+    provideHttpClient(
+      withInterceptorsFromDi()  // Usamos esta opción ahora
+    ),
+    provideAnimationsAsync(),
+    AuthInterceptor,  // Registra tu interceptor aquí para que Angular lo inyecte
+  ],
+}).catch((err) => console.error(err));
