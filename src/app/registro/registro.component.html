@@ -1,0 +1,74 @@
+<div class="container">
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title class="titulo">Registro de Usuarios</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+          <!-- Campo Nombre -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre" formControlName="nombre" />
+            <mat-error *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched">
+              El nombre es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Apellido -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Apellido" formControlName="apellido" />
+            <mat-error *ngIf="registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched">
+              El apellido es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Número de Identificación -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Número de Identificación" formControlName="numeroIdentificacion" />
+            <mat-error *ngIf="registroForm.get('numeroIdentificacion')?.invalid && registroForm.get('numeroIdentificacion')?.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Tipo de Identificación -->
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Tipo de Identificación" formControlName="tipoIdentificacion">
+              <mat-option *ngFor="let tipo of tiposIdentificacion" [value]="tipo">{{ tipo }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registroForm.get('tipoIdentificacion')?.invalid && registroForm.get('tipoIdentificacion')?.touched">
+              Debe seleccionar un tipo de identificación
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Email -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" formControlName="email" />
+            <mat-error *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched">
+              El email es obligatorio y debe ser válido
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Usuario -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Usuario" formControlName="usuario" />
+            <mat-error *ngIf="registroForm.get('usuario')?.invalid && registroForm.get('usuario')?.touched">
+              El usuario es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo Contraseña -->
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Contraseña" formControlName="password" />
+            <mat-error *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
+              La contraseña es obligatoria y debe tener al menos 6 caracteres
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Botón de enviar -->
+          <button mat-raised-button color="primary" type="submit" [disabled]="!registroForm.valid">
+            Registrar
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
