@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router'; // Importar Router
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,9 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    HttpClientModule,
     CommonModule,
-    RouterModule, // Importar RouterModule
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -30,7 +28,7 @@ export class RegistroComponent implements OnInit {
   registroForm!: FormGroup;
   tiposIdentificacion: string[] = ['DNI', 'Cédula', 'Pasaporte'];
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {} // Agregar Router en el constructor
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.registroForm = this.fb.group({
@@ -54,14 +52,22 @@ export class RegistroComponent implements OnInit {
           tipoIdentificacion: this.registroForm.value.tipoIdentificacion,
           email: this.registroForm.value.email,
           fechaCreacion: new Date().toISOString(), 
+          usuario:this.registroForm.value.usuario,
+          pass : this.registroForm.value.password
         }
       };
 
-      this.http.post<any>('http://localhost:5078/api/personas/registro', personaData).subscribe(
+      // Obtener el token de localStorage
+      const token = localStorage.getItem('token');
+
+      // Configurar los headers con el token
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+      this.http.post<any>('http://localhost:5078/api/personas/registro', personaData, { headers }).subscribe(
         (response) => {
-          if (response.exito) {
+          if (response.mensaje === "Registro exitoso") {
             alert('Registro exitoso');
-            this.router.navigate(['/dashboard']); // Ahora sí existe router
+            this.router.navigate(['/dashboard']); 
           } else {
             alert('Error en el registro');
           }

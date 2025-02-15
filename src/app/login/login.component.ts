@@ -44,10 +44,11 @@ export class LoginComponent implements OnInit {
   
       this.http.post<any>('http://localhost:5078/api/usuarios/login', loginData).subscribe(
         (response) => {
-          if (response.mensaje === 'Autenticación exitosa') {
-            //Token
-            localStorage.setItem('token', response.token); 
-            this.router.navigate(['/dashboard']);
+          console.error(response);
+          if (response.response === 'Autenticación exitosa') { // Asegúrate de acceder correctamente al mensaje
+            localStorage.setItem('token', response.token);
+            this.router.navigate(['/registro']);
+            alert('Login Exitoso!');
           } else {
             alert('Credenciales incorrectas');
           }
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
           alert('Error en la autenticación');
         }
       );
+      
     }
   }
 }
