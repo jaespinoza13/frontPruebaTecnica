@@ -63,7 +63,7 @@ export class RegistroComponent implements OnInit {
       // Configurar los headers con el token
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-      this.http.post<any>('http://localhost:5078/api/personas/registro', personaData, { headers }).subscribe(
+      this.http.post<any>('http://backend:5000/api/personas/registro', personaData, { headers }).subscribe(
         (response) => {
           if (response.mensaje === "Registro exitoso") {
             alert('Registro exitoso');

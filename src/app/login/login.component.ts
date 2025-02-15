@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         pass: this.loginForm.value.password,
       };
   
-      this.http.post<any>('http://localhost:5078/api/usuarios/login', loginData).subscribe(
+      this.http.post<any>('http://backend:5000/api/usuarios/login', loginData).subscribe(
         (response) => {
           console.error(response);
           if (response.response === 'Autenticación exitosa') { // Asegúrate de acceder correctamente al mensaje

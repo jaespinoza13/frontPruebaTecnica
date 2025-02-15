@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontPruebaTecnica": {
+    "front-personas": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,15 +11,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/front-prueba-tecnica",
+            "outputPath": "dist/front-personas", 
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",   // Propiedad correcta para Angular moderno
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",  // Configuración correcta para TypeScript
             "assets": [
               {
                 "glob": "**/*",
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "frontPruebaTecnica:build:production"
+              "buildTarget": "front-personas:build:production"
             },
             "development": {
-              "buildTarget": "frontPruebaTecnica:build:development"
+              "buildTarget": "front-personas:build:development"
             }
           },
           "defaultConfiguration": "development"
